@@ -1,0 +1,12 @@
+# Monitorar Logs de Firewall para Ataques
+$logPath = "C:\Windows\System32\LogFiles\Firewall\pfirewall.log"
+
+while ($true) {
+    $logContent = Get-Content -Path $logPath -Tail 10
+    foreach ($line in $logContent) {
+        if ($line -match "DROP") {
+            Write-Output "Possível ataque detectado: $line"
+        }
+    }
+    Start-Sleep -Seconds 10
+}
