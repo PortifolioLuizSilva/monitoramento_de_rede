@@ -1,0 +1,8 @@
+# Monitorar Conexões de Rede Ativas
+while ($true) {
+    $connections = Get-NetTCPConnection
+    foreach ($connection in $connections) {
+        Write-Output "Local Address: $($connection.LocalAddress):$($connection.LocalPort) - Remote Address: $($connection.RemoteAddress):$($connection.RemotePort) - State: $($connection.State)"
+    }
+    Start-Sleep -Seconds 10
+}
