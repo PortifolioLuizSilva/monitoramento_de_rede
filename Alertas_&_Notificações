@@ -1,0 +1,16 @@
+# Enviar Alerta por Email
+function Send-Alert {
+    param (
+        [string]$subject,
+        [string]$body
+    )
+    $smtpServer = "smtp.seuservidor.com"
+    $smtpFrom = "alerta@seudominio.com"
+    $smtpTo = "admin@seudominio.com"
+    $message = New-Object Net.Mail.MailMessage($smtpFrom,$smtpTo,$subject,$body)
+    $smtp = New-Object Net.Mail.SmtpClient($smtpServer)
+    $smtp.Send($message)
+}
+
+# Exemplo de uso:
+Send-Alert -subject "Alerta de Segurança" -body "Um possível ataque foi detectado."
